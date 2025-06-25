@@ -1,7 +1,8 @@
 import connectDB from "@/lib/mongoose";
 import User from "@/models/Users";
 import { error } from "console";
-import bcrypt from "bcrypt";
+
+import bcrypt from "bcryptjs";
 import { signJwtToken } from "@/lib/jwt";
 import { NextResponse } from "next/server";
 import { AppError } from "@/utils/error";
