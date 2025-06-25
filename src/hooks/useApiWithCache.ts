@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 
 interface CacheEntry<T> {
   data: T;
@@ -118,6 +118,7 @@ export function useApiWithCache<T>(
     fetchData(false); // Refetch without using cache
   }, [cacheKey, fetchData]);
 
+  const extraDeps = useMemo(() => options.dependencies ?? [], [options.dependencies]);
   useEffect(() => {
     if (options.immediate !== false) {
       fetchData();
@@ -129,7 +130,7 @@ export function useApiWithCache<T>(
         abortControllerRef.current.abort();
       }
     };
-  }, [fetchData, ...(options.dependencies || [])]);
+  },  [fetchData, options.immediate, extraDeps]);
 
   return {
     data,

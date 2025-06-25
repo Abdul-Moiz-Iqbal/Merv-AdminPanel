@@ -1,10 +1,10 @@
 "use client";
 import { useApiWithCache } from "@/hooks/useApiWithCache";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 export default function AllCompanies() {
-  
   const {
     data: companies,
     loading,
@@ -91,9 +91,9 @@ export default function AllCompanies() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedCompany ),
+      body: JSON.stringify(updatedCompany),
     });
-    invalidateCache()
+    invalidateCache();
     setShowEditModal(false);
     setSelectedCompany(null);
   };
@@ -227,11 +227,20 @@ export default function AllCompanies() {
 
               {company.logo && (
                 <div className="mb-4">
-                  <img
+                  {/* <img
                     src={company.logo}
                     alt="Company"
                     className="w-full h-32 object-cover rounded-lg"
-                  />
+                  /> */}
+
+                  <div className="relative w-full h-32">
+                    <Image
+                      src={company.logo}
+                      alt="Company"
+                      fill // 👈 makes the image fill its parent
+                      className="object-cover rounded-lg"
+                    />
+                  </div>
                 </div>
               )}
 
@@ -291,8 +300,8 @@ export default function AllCompanies() {
                 Confirm Delete
               </h3>
               <p className="text-gray-600 mb-6">
-                Are you sure you want to delete "{companyToDelete.name}"? This
-                action cannot be undone.
+                Are you sure you want to delete &quot;{companyToDelete.name}
+                &quot;? This action cannot be undone.
               </p>
               <div className="flex justify-end space-x-3">
                 <button
@@ -438,11 +447,19 @@ function EditCompanyModal({ company, onSave, onCancel }) {
             />
             {formData.logo && (
               <div className="mt-3">
-                <img
+                {/* <img
                   src={formData.logo}
                   alt="Preview"
-                  className="w-32 h-32 object-cover rounded-lg border"
-                />
+                  className="object-cover rounded-lg border"
+                /> */}
+                <div className="relative w-32 h-32">
+                  <Image
+                    src={formData.logo}
+                    alt="Preview"
+                    fill
+                    className="object-cover rounded-lg border"
+                  />
+                </div>
               </div>
             )}
           </div>

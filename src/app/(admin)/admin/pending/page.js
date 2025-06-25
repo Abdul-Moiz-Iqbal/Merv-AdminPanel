@@ -1,5 +1,6 @@
 "use client";
 import { useApiWithCache } from "@/hooks/useApiWithCache";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function PendingReviews() {
@@ -176,11 +177,11 @@ export default function PendingReviews() {
                   </p>
 
                   {company.logo && (
-                    <div className="mb-4">
-                      <img
+                    <div className="mb-4 w-full h-32 ">
+                      <Image
                         src={company.logo}
                         alt="Company"
-                        className="w-full h-32 object-cover rounded-lg"
+                        className="object-cover rounded-lg"
                       />
                     </div>
                   )}
@@ -287,11 +288,14 @@ export default function PendingReviews() {
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Uploaded Image
                         </label>
-                        <img
-                          src={selectedCompany.logo}
-                          alt="Company"
-                          className="w-full h-48 object-cover rounded-lg border"
-                        />
+
+                        <div className="mb-4 w-full h-32 ">
+                          <Image
+                            src={selectedCompany.logo}
+                            alt="Company"
+                            className="object-cover rounded-lg"
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
