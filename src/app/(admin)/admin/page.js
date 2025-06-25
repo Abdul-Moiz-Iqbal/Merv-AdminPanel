@@ -1,109 +1,3 @@
-// 'use client'
-// import { useApiWithCache } from '@/hooks/useApiWithCache';
-// import { useState, useEffect } from 'react'
-
-// export default function AdminDashboard() {
-  
-//     const {
-//       data: companies,
-//       loading,
-//       error,
-//       refetch,
-//       invalidateCache,
-//     } = useApiWithCache("http://localhost:3000/api/company", {
-//       immediate: true,
-//       cacheKey: "all-companies",
-//       cacheTTL: 60 * 1000, // 1 min
-//     });
-//     console.log(companies)
-
-//   const [stats, setStats] = useState({
-//     pendingReviews: 12,
-//     totalCompanies: 45,
-//     approvedToday: 8,
-//     rejectedToday: 2
-//   })
-  
-
-
-//   return (
-//     <div>
-//       <h1 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h1>
-      
-//       {/* Stats Cards */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-//         <div className="bg-white p-6 rounded-lg shadow-sm border">
-//           <div className="flex items-center justify-between">
-//             <div>
-//               <p className="text-sm text-gray-600">Pending Reviews</p>
-//               <p className="text-2xl font-bold text-orange-600">{2}</p>
-//             </div>
-//             <div className="text-3xl">⏳</div>
-//           </div>
-//         </div>
-        
-//         <div className="bg-white p-6 rounded-lg shadow-sm border">
-//           <div className="flex items-center justify-between">
-//             <div>
-//               <p className="text-sm text-gray-600">Total Companies</p>
-//               <p className="text-2xl font-bold text-blue-600">{stats.totalCompanies}</p>
-//             </div>
-//             <div className="text-3xl">🏢</div>
-//           </div>
-//         </div>
-        
-//         <div className="bg-white p-6 rounded-lg shadow-sm border">
-//           <div className="flex items-center justify-between">
-//             <div>
-//               <p className="text-sm text-gray-600">Approved Today</p>
-//               <p className="text-2xl font-bold text-green-600">{stats.approvedToday}</p>
-//             </div>
-//             <div className="text-3xl">✅</div>
-//           </div>
-//         </div>
-        
-//         <div className="bg-white p-6 rounded-lg shadow-sm border">
-//           <div className="flex items-center justify-between">
-//             <div>
-//               <p className="text-sm text-gray-600">Rejected Today</p>
-//               <p className="text-2xl font-bold text-red-600">{stats.rejectedToday}</p>
-//             </div>
-//             <div className="text-3xl">❌</div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Recent Activity */}
-//       <div className="bg-white rounded-lg shadow-sm border">
-//         <div className="p-6 border-b">
-//           <h2 className="text-lg font-semibold">Recent Activity</h2>
-//         </div>
-//         <div className="p-6">
-//           <div className="space-y-4">
-//             {[
-//               { action: 'Approved', company: 'Tech Solutions Ltd', time: '2 hours ago', type: 'approved' },
-//               { action: 'Rejected', company: 'ABC Corp', time: '4 hours ago', type: 'rejected' },
-//               { action: 'New Submission', company: 'Innovation Hub', time: '6 hours ago', type: 'pending' },
-//               { action: 'Approved', company: 'Digital Works', time: '1 day ago', type: 'approved' },
-//             ].map((activity, index) => (
-//               <div key={index} className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50">
-//                 <div className={`w-3 h-3 rounded-full ${
-//                   activity.type === 'approved' ? 'bg-green-500' :
-//                   activity.type === 'rejected' ? 'bg-red-500' : 'bg-orange-500'
-//                 }`}></div>
-//                 <div className="flex-1">
-//                   <p className="text-sm font-medium">{activity.action} - {activity.company}</p>
-//                   <p className="text-xs text-gray-500">{activity.time}</p>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
 'use client'
 import { useApiWithCache } from '@/hooks/useApiWithCache';
 import { useState, useEffect, useMemo } from 'react'
@@ -116,7 +10,7 @@ export default function AdminDashboard() {
     error,
     refetch,
     invalidateCache,
-  } = useApiWithCache("http://localhost:3000/api/company", {
+  } = useApiWithCache("/api/company", {
     immediate: true,
     cacheKey: "all-companies",
     cacheTTL: 60 * 1000, // 1 min

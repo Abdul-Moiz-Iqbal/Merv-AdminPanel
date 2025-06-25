@@ -11,7 +11,7 @@ export default function AllCompanies() {
     error,
     refetch,
     invalidateCache,
-  } = useApiWithCache("http://localhost:3000/api/company", {
+  } = useApiWithCache("/api/company", {
     immediate: true,
     cacheKey: "all-companies",
     cacheTTL: 60 * 1000, // 1 min
