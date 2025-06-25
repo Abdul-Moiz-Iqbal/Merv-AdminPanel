@@ -5,41 +5,39 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    // const token = req.cookies.get("token")?.value;
-    // console.log("token:", token);
+    const token = req.cookies.get("token")?.value;
+    console.log("token:", token);
 
-    // // Route user away from login if already authenticated
+    // Route user away from login if already authenticated
 
-    // if (token && verifyJwtToken(token)) {
-    //   const decodedToken = decodeJwtToken(token);
-    //   console.log("decoded Token", decodedToken);
-    //   const user = await AuthService.verifyUser(decodedToken.email);
+    if (token && verifyJwtToken(token)) {
+      const decodedToken = decodeJwtToken(token);
+      console.log("decoded Token", decodedToken);
+      const user = await AuthService.verifyUser(decodedToken.email);
 
-    //   if(user){
-    //   console.log("User already logged in");
-    //   // return NextResponse.redirect(new URL('/admin', req.url)); // or dashboard
-    //   return NextResponse.json({
-    //     message: "User is logged in already go to dashboard",
-    //     code: 200,
-    //   });
-    //   }
-    // }
+      if(user){
+      console.log("User already logged in");
+      // return NextResponse.redirect(new URL('/admin', req.url)); // or dashboard
+      return NextResponse.json({
+        message: "User is logged in already go to dashboard",
+        code: 200,
+      });
+      }
+    }
 
-    // const userData = await req.json();
+    const userData = await req.json();
 
-    // const result = await AuthService.login(userData);
+    const result = await AuthService.login(userData);
 
-    // const response = NextResponse.json({ message: true, code: 200, result });
-    // response.cookies.set("token", result, {
-    //   httpOnly: true,
-    //   path: "/",
-    //   sameSite: "strict",
-    //   maxAge: 60 * 60 * 24,
-    // });
-    
-    // return response;
+    const response = NextResponse.json({ message: true, code: 200, result });
+    response.cookies.set("token", result, {
+      httpOnly: true,
+      path: "/",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24,
+    });
 
-    return NextResponse.json({message:"Thi api endpoint shoul not be used"})
+    return response;
   } catch (error) {
     if (error instanceof AppError) {
       return NextResponse.json(
