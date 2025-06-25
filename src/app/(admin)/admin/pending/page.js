@@ -177,10 +177,11 @@ export default function PendingReviews() {
                   </p>
 
                   {company.logo && (
-                    <div className="mb-4 w-full h-32 ">
+                    <div className="relative mb-4 w-full h-32 ">
                       <Image
                         src={company.logo}
                         alt="Company"
+                        fill
                         className="object-cover rounded-lg"
                       />
                     </div>
@@ -289,10 +290,11 @@ export default function PendingReviews() {
                           Uploaded Image
                         </label>
 
-                        <div className="mb-4 w-full h-32 ">
+                        <div className="mb-4 relative w-full h-32 ">
                           <Image
                             src={selectedCompany.logo}
                             alt="Company"
+                            fill
                             className="object-cover rounded-lg"
                           />
                         </div>
