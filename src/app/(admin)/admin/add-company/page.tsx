@@ -42,6 +42,7 @@ export default function AddCompany() {
     phone: string;
     productDescription: string;
     logo: string;
+    category:String;
     logoPublicId: string;
     file: File | null;
   }>({
@@ -49,6 +50,7 @@ export default function AddCompany() {
     contact: "",
     email: "",
     phone: "",
+    category: '',
     productDescription: "",
     logo: "",
     logoPublicId: "",
@@ -58,6 +60,13 @@ export default function AddCompany() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+    const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+    setFormData({...formData, category:event.target.value})
+    console.log("Selected:", event.target.value); // optional
+  };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; // Safe access with optional chaining
@@ -177,6 +186,7 @@ export default function AddCompany() {
         contact: formData.contact,
         email: formData.email,
         phone: formData.phone,
+        category: formData.category,
         productDescription: formData.productDescription,
         logo: formData.logo,
         logoPublicId: formData.logoPublicId,
@@ -224,6 +234,7 @@ export default function AddCompany() {
       contact: "",
       email: "",
       phone: "",
+      category:'',
       productDescription: "",
       logo: "",
       logoPublicId: "",
@@ -329,7 +340,36 @@ export default function AddCompany() {
                 </div>
               </div>
             </div>
+            {/* category drop down  */}
 
+<div>
+      <label htmlFor="dropdown" className="block text-sm font-medium text-gray-700 mb-1">
+        Choose an option
+      </label>
+      <select
+        id="dropdown"
+        name="dropdown"
+        value={selectedValue}
+        onChange={handleChange}
+        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      >
+        <option value="">Select</option>
+        <option value="textile">textile</option>
+        <option value="cosmetics">cosmetics</option>
+        <option value="electronics">electronics</option>
+        <option value="furniture">furniture</option>
+        <option value="handicrafts">handicrafts</option>
+        <option value="jewelry">jewelry</option>
+        <option value="medical">medical</option>
+        <option value="seafood">seafood</option>
+        <option value="food">food</option>
+      </select>
+
+      {/* Optional: display the selected value */}
+      {selectedValue && (
+        <p className="mt-2 text-sm text-gray-600">You selected: {selectedValue}</p>
+      )}
+    </div>
             {/* Product Information */}
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -473,7 +513,10 @@ export default function AddCompany() {
                     placeholder="https://example.com/logo.jpg"
                     disabled={!!formData.file}
                   />
-                  {formData.logo && !formData.logoPublicId && (
+                  {formData.logo && !formData.logoPublicId && formData.logo &&
+  (formData.logo.startsWith("/") ||
+    formData.logo.startsWith("http://") ||
+    formData.logo.startsWith("https://")) && (
                     <div className="mt-3">
                       {/* <img
                         src={formData.logo}

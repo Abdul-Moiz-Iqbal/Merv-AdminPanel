@@ -19,16 +19,42 @@ export async function POST(res: NextRequest) {
 }
 
 //Get all companies
+// export async function GET() {
+//   try {
+//     const result = await CompanyService.getAllCompanies();
+//     console.log("companies api called");
+//     // return NextResponse.json(result);
+//   } catch (error) {
+//     return NextResponse.json({ message: error }, { status: 500 });
+//   }
+// }
+
 export async function GET() {
   try {
     const result = await CompanyService.getAllCompanies();
     console.log("companies api called");
-    return NextResponse.json(result);
+
+    return new NextResponse(JSON.stringify(result), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*", // Allow all origins (for dev only)
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
   } catch (error) {
-    return NextResponse.json({ message: error }, { status: 500 });
+    return NextResponse.json(
+      { message: "Internal Server Error", error },
+      {
+        status: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
   }
 }
-
 //Accpet/reject all company(changing status to approved/rejected from pending)
 export async function PUT(req:NextRequest){
   try {

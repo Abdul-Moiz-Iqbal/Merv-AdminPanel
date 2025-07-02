@@ -173,7 +173,7 @@ export default function PendingReviews() {
                   </div>
 
                   <p className="text-sm text-gray-700 mb-4 line-clamp-2">
-                    {company.productDescription}
+                    {company.productDescription.en}
                   </p>
 
                   {company.logo && (
@@ -281,7 +281,7 @@ export default function PendingReviews() {
                         Product Description
                       </label>
                       <p className="text-sm text-gray-900">
-                        {selectedCompany.productDescription}
+                        {selectedCompany.productDescription.en}
                       </p>
                     </div>
                     {selectedCompany.logo && (

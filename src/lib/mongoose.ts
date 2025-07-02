@@ -17,6 +17,7 @@ declare global {
 }
 
 let cached = global.mongoose;
+console.log(global.mongoose)
 
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };

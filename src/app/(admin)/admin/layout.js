@@ -50,9 +50,9 @@ export default function AdminLayout({ children }) {
               <span className="text-xl">☰</span>
             </button>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-700">Welcome, Merv</span>
+              <span className="text-gray-700">Welcome, Fatih</span>
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                M
+                F
               </div>
             </div>
           </div>

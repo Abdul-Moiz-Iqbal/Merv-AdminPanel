@@ -6,7 +6,8 @@ const ConmpanySchema = new Schema(
     email: { type: String, required: true },
     contact: { type: String, required: true },
     phone: { type: String, required: true },
-    productDescription: { type: String, required: true },
+    productDescription: { type: Map, required: true },
+    category:{type:String , required:true},
     logo: { type: String },
     status: {
       type: String,

@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
 
   // Prevent unauthenticated access to protected routes
   if (isProtectedRoute && !isAuthenticated) {
-    console.log("redirecting to login page")
+    console.log("redirecting to login page");
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -43,5 +43,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/company/:path*", "/login"],
+  matcher: ["/admin/:path*", "/login"],
 };
