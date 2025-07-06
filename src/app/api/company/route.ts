@@ -2,21 +2,67 @@ import { CompanyService } from "@/services/companyService";
 import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
-//Create a company
-export async function POST(res: NextRequest) {
-  const companyData = await res.json();
-  console.log(companyData);
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*", // or set to your frontend origin
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+export async function OPTIONS() {
+  // This handles the preflight request
+  return new NextResponse(null, {
+    status: 204,
+    headers: CORS_HEADERS,
+  });
+}
+
+export async function POST(req: NextRequest) {
   try {
+    const companyData = await req.json();
+    console.log(companyData)
     const result = await CompanyService.createComapny(companyData);
-    return NextResponse.json(
-      { message: result.message },
-      { status: result.code }
-    );
+
+    return new NextResponse(JSON.stringify({ message: result.message }), {
+      status: result.code || 200,
+      headers: CORS_HEADERS,
+    });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(error);
+    console.error(error);
+    return new NextResponse(JSON.stringify({ error: "Something went wrong" }), {
+      status: 500,
+      headers: CORS_HEADERS,
+    });
   }
 }
+
+//Create a company
+// export async function POST(res: NextRequest) {
+//   const companyData = await res.json();
+//   console.log(companyData);
+//   try {
+//     const result = await CompanyService.createComapny(companyData);
+//     // return NextResponse.json(
+//     //   { message: result.message },
+//     //   { status: result.code }
+//     // );
+//     return NextResponse.json(
+//   { message: result.message },
+//   {
+//     status: result.code,
+//     headers: {
+//       "Access-Control-Allow-Origin": "*", // Use specific origin in production for security
+//       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+//       "Access-Control-Allow-Headers": "Content-Type, Authorization",
+//     },
+//   }
+// );
+
+//   } catch (error) {
+//     console.log(error);
+//     return NextResponse.json(error);
+//   }
+// }
 
 //Get all companies
 // export async function GET() {

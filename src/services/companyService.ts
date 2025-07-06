@@ -46,10 +46,15 @@ export class CompanyService {
       category,
       logoPublicId,
     } = comapnyData;
-    if (!name.trim() || !contact.trim() || !email.trim() || !category.trim() || !phone.trim() ) {
-      return { message: "Invalid Data", code: 400 };
-    }
-
+   if (
+  !name?.trim() ||
+  !contact?.trim() ||
+  !email?.trim() ||
+  !category?.trim() ||
+  !phone?.trim()
+) {
+  return { message: "Invalid Data", code: 400 };
+}
     // this will auto detect the language and return the translated version
   const translatedDescription = await getTranslations(productDescription)
     

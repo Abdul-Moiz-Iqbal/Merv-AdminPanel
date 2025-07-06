@@ -135,10 +135,20 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({
-      message: "Upload successful",
-      data: result,
-    });
+      return NextResponse.json(
+  {
+    message: "Uploaded successful",
+    data: result,
+  },
+  {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // or your frontend origin
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  }
+);
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
@@ -159,10 +169,24 @@ export async function DELETE(request: NextRequest) {
 
     const result = await deleteFromCloudinary(publicId);
 
-    return NextResponse.json({
-      message: "Delete successful",
-      data: result,
-    });
+    // return NextResponse.json({
+    //   message: "Delete successful",
+    //   data: result,
+    // });
+    return NextResponse.json(
+  {
+    message: "Delete successful",
+    data: result,
+  },
+  {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // or your frontend origin
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  }
+);
   } catch (error) {
     console.error("Delete error:", error);
     return NextResponse.json({ error: "Delete failed" }, { status: 500 });
