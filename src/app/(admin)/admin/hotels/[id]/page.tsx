@@ -281,7 +281,7 @@ export default function EditHotelPage({ params }: EditHotelPageProps) {
                 {formData.image && (
                   <div className="mt-2">
                     <Image
-                      src={formData.image || "/images/placeholder.jpg"}
+                      src={formData.image || "https://placehold.co/600x400"}
                       alt="Hotel preview"
                       width={80} // Tailwind h-20 = 80px
                       height={80} // Tailwind w-20 = 80px

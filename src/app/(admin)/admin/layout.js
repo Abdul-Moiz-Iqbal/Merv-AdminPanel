@@ -12,6 +12,8 @@ export default function AdminLayout({ children }) {
     { name: 'Pending Reviews', href: '/admin/pending', icon: '⏳' },
     { name: 'All Companies', href: '/admin/companies', icon: '🏢' },
     { name: 'Add Company', href: '/admin/add-company', icon: '➕' },
+    { name: 'Add hotel', href: '/admin/hotels', icon: '' },
+    { name: 'Product Requests', href: '/admin/find-requests', icon: '' },
   ]
 
   return (

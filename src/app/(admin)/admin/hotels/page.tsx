@@ -253,14 +253,16 @@ export default function HotelsAdminPage() {
                 <tr key={hotel._id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
+                    
                       <Image
-                        src={hotel.image || "/images/hotel-placeholder.jpg"}
+                      unoptimized
+                        src={hotel.image || "https://placehold.co/600x400"}
                         alt={hotel.name}
                         width={48} // equivalent to w-12
                         height={48} // equivalent to h-12
                         className="rounded-lg object-cover mr-4"
                         onError={(e) => {
-                          e.currentTarget.src = "/images/hotel-placeholder.jpg";
+                          e.currentTarget.src = "https://placehold.co/600x400";
                         }}
                       />
 
